@@ -11,7 +11,7 @@ class PlacedCrate(
     blockLocation: Location
 ) {
     // Center the location, they're mutable because bukkit is bad at designing APIs.
-    private val location = blockLocation.clone().apply {
+    val location = blockLocation.clone().apply {
         x += 0.5
         y += 0.5
         z += 0.5
@@ -38,6 +38,11 @@ class PlacedCrate(
     }
 
     internal fun onRemove() {
+        hologram.remove()
+        item?.remove()
+    }
+
+    internal fun handleChunkUnload() {
         hologram.remove()
         item?.remove()
     }
